@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <style>
+            .board {
+                display: grid;
+                grid-template-rows: 200px 200px 200px;
+                grid-template-columns: 200px 200px 200px;
+            }
+
+            body {
+                display: flex; /*attached to each other*/
+                flex-direction: column;
+                /* align-items: center; */
+                justify-content: center;
+            }
+
+            .box{
+                /* border: 1px solid; */
+                /* border-bottom: 1px solid; */
+                /* border-right: 1px solid; */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 90px;
+                border-bottom: 1px solid;
+                border-right: 1px solid;
+            }
+            .box:nth-child(3n) {
+                border-right: 0px;
+            }
+            .box:nth-child(n+7) {
+                border-bottom: 0px;
+            }
+            
+
+        </style>
+    </head>
+    <body>
+        <div class='board' id='boardID'>
+            <div class='box'></div>
+            <div class='box'></div>
+            <div class='box'></div>
+            <div class='box'></div>
+            <div class='box'></div>
+            <div class='box'></div>
+            <div class='box'></div>
+            <div class='box'></div>
+            <div class='box'></div>
+        </div>
+        <br><br>
+        <button id='reset' style="width:20%" onclick="resetBoard()">Reset</button>
+    </body>
+    <script>
+        let counter = 0;
+        function update(event) {
+            // console.log(event.currentTarget);
+            // console.log(event);
+            // console.log(event.path[0]);
+            
+            counter++;
+            if (counter % 2 == 0) {
+                event.path[0].innerHTML = 'O';
+            }
+            else {
+                event.path[0].innerHTML = 'X';
+            }
+            logic();
+        }
+
+        function resetBoard() {
+            let board = document.getElementById('boardID');
+            // console.log(board.children);
+            for(let i = 0; i < board.children.length; i++) {
+                board.children[i].innerText='';
+            }
+            
+        }
+
+        function logic() {
+            let board = document.getElementById('boardID');
+            if (board.children[0].innerHTML == board.children[1].innerHTML && board.children[0].innerHTML == board.children[2].innerHTML) {
+                console.log('the chuff');
+            }
+        }
+
+        document.getElementById('boardID').addEventListener('touchstart', update);
+    </script>
+</html>
